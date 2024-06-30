@@ -1,6 +1,10 @@
 -- Disable syntax highlighting
 vim.cmd("syntax off")
 
+-- Config
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local keymap = vim.keymap
 local vscode = vim.fn.VSCodeNotify
 
@@ -19,14 +23,18 @@ keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Menus
-keymap.set({ "n", "v" }, "<leader>ff", function()
+keymap.set({ "n", "v" }, "<leader>sf", function()
 	vscode("workbench.action.quickOpen")
 end)
-keymap.set({ "n", "v" }, "<leader>fa", function()
+keymap.set({ "n", "v" }, "<leader>sa", function()
 	vscode("workbench.action.showCommands")
 end)
 
-keymap.set({ "n", "v" }, "<leader>fs", function()
+keymap.set({ "n", "v" }, "<leader>/", function()
+	vscode("workbench.actions.find")
+end)
+
+keymap.set({ "n", "v" }, "<leader>sw", function()
 	vscode("workbench.action.findInFiles")
 end)
 
@@ -39,6 +47,9 @@ keymap.set({ "n", "v" }, "<leader>tt", function()
 end)
 keymap.set({ "n", "v" }, "<leader>tz", function()
 	vscode("workbench.action.toggleZenMode")
+end)
+keymap.set({ "n", "v" }, "<leader>e", function()
+	vscode("workbench.actions.view.problems")
 end)
 
 -- Movement
@@ -69,20 +80,37 @@ end)
 keymap.set({ "n", "v" }, "gd", function()
 	vscode("editor.action.revealDefinition")
 end)
+keymap.set({ "n", "v" }, "gi", function()
+	vscode("editor.action.goToImplementation")
+end)
+
+-- Comment
+keymap.set({ "n", "v" }, "gc", function()
+	vscode("editor.action.commentLine")
+end)
+
+-- Code action
+keymap.set({ "n" }, "<leader>ca", function()
+	vscode("editor.action.quickFix")
+end)
+
+keymap.set({ "n" }, "<leader>cr", function()
+	vscode("editor.action.rename")
+end)
 
 -- Split
-keymap.set({ "n", "v" }, "<leader>sl", function()
-	vscode("workbench.action.splitEditorRight")
-end)
-keymap.set({ "n", "v" }, "<leader>sk", function()
-	vscode("workbench.action.splitEditorUp")
-end)
-keymap.set({ "n", "v" }, "<leader>sj", function()
-	vscode("workbench.action.splitEditorDown")
-end)
-keymap.set({ "n", "v" }, "<leader>sh", function()
-	vscode("workbench.action.splitEditorLeft")
-end)
+-- keymap.set({ "n", "v" }, "<leader>sv", function()
+-- 	vscode("workbench.action.splitEditorRight")
+-- end)
+-- keymap.set({ "n", "v" }, "<leader>sk", function()
+-- 	vscode("workbench.action.splitEditorUp")
+-- end)
+-- keymap.set({ "n", "v" }, "<leader>sj", function()
+-- 	vscode("workbench.action.splitEditorDown")
+-- end)
+-- keymap.set({ "n", "v" }, "<leader>sh", function()
+-- 	vscode("workbench.action.splitEditorLeft")
+-- end)
 
 -- Closing
 keymap.set({ "n", "v" }, "<leader>q", function()
