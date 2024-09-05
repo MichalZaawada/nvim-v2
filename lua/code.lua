@@ -2,6 +2,10 @@
 vim.cmd("syntax off")
 
 -- Config
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.signcolumn = "yes"
+vim.opt.timeoutlen = 300
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -99,18 +103,18 @@ keymap.set({ "n" }, "<leader>cr", function()
 end)
 
 -- Split
--- keymap.set({ "n", "v" }, "<leader>sv", function()
+-- keymap.set({ "n", "v" }, "<leader>pv", function()
 -- 	vscode("workbench.action.splitEditorRight")
 -- end)
--- keymap.set({ "n", "v" }, "<leader>sk", function()
+-- keymap.set({ "n", "v" }, "<leader>pk", function()
 -- 	vscode("workbench.action.splitEditorUp")
 -- end)
--- keymap.set({ "n", "v" }, "<leader>sj", function()
--- 	vscode("workbench.action.splitEditorDown")
--- end)
--- keymap.set({ "n", "v" }, "<leader>sh", function()
--- 	vscode("workbench.action.splitEditorLeft")
--- end)
+keymap.set({ "n", "v" }, "<leader>ph", function()
+	vscode("workbench.action.splitEditorDown")
+end)
+keymap.set({ "n", "v" }, "<leader>pv", function()
+	vscode("workbench.action.splitEditorLeft")
+end)
 
 -- Closing
 keymap.set({ "n", "v" }, "<leader>q", function()
