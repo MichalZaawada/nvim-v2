@@ -271,7 +271,7 @@ else
 				-- keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 				-- Slightly advanced example of overriding default behavior and theme
-				keymap.set("n", "/", function()
+				keymap.set("n", "<leader>/", function()
 					-- You can pass additional configuration to Telescope to change the theme, layout, etc.
 					builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 						winblend = 10,
@@ -299,9 +299,12 @@ else
 			"neovim/nvim-lspconfig",
 			dependencies = {
 				-- Automatically install LSPs and related tools to stdpath for Neovim
-				{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+				{
+					"williamboman/mason.nvim",
+					config = true,
+				}, -- NOTE: Must be loaded before dependants
 				"williamboman/mason-lspconfig.nvim",
-				"WhoIsSethDaniel/mason-tool-installer.nvim",
+				{ "WhoIsSethDaniel/mason-tool-installer.nvim", opts = { run_on_start = false } },
 
 				-- Useful status updates for LSP.
 				-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -473,7 +476,6 @@ else
 					-- But for many setups, the LSP (`tsserver`) will work just fine
 					-- tsserver = {},
 					--
-					csharp_ls = {},
 					lua_ls = {
 						-- cmd = {...},
 						-- filetypes = { ...},
@@ -674,16 +676,28 @@ else
 			-- change the command in the config to whatever the name of that colorscheme is.
 			--
 			-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-			"nanotech/jellybeans.vim",
+			-- "nanotech/jellybeans.vim",
+			"scottmckendry/cyberdream.nvim",
+			lazy = false,
 			priority = 1000, -- Make sure to load this before all the other start plugins.
 			init = function()
 				-- Load the colorscheme here.
 				-- Like many other themes, this one has different styles, and you could load
 				-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-				vim.cmd.colorscheme("jellybeans")
+				-- vim.cmd.colorscheme("jellybeans")
+				vim.cmd.colorscheme("cyberdream")
 
 				-- You can configure highlights by doing something like:
 				vim.cmd.hi("Comment gui=none")
+			end,
+			config = function()
+				require("cyberdream").setup({
+					theme = {
+						colors = {
+							bg = "#121212",
+						},
+					},
+				})
 			end,
 		},
 
@@ -809,6 +823,33 @@ else
 				end
 				return keys
 			end,
+		},
+		{
+			"seblj/roslyn.nvim",
+			ft = "cs",
+			opts = {
+				config = {
+					settings = {
+						["csharp|inlay_hints"] = {
+							csharp_enable_inlay_hints_for_implicit_object_creation = true,
+							csharp_enable_inlay_hints_for_implicit_variable_types = true,
+							csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+							csharp_enable_inlay_hints_for_types = true,
+							dotnet_enable_inlay_hints_for_indexer_parameters = true,
+							dotnet_enable_inlay_hints_for_literal_parameters = true,
+							dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+							dotnet_enable_inlay_hints_for_other_parameters = true,
+							dotnet_enable_inlay_hints_for_parameters = true,
+							dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+							dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+							dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+						},
+						["csharp|code_lens"] = {
+							dotnet_enable_references_code_lens = true,
+						},
+					},
+				},
+			},
 		},
 		{
 			"nvim-neo-tree/neo-tree.nvim",

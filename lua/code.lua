@@ -5,7 +5,7 @@ vim.cmd("syntax off")
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
-vim.opt.timeoutlen = 300
+vim.opt.ttimeoutlen = 100
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
